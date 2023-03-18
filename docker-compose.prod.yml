@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+  app:
+    container_name: esport_app
+    image: esport_app_image
+    env_file:
+      - .env.esport
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    volumes:
+      - ./:/src
+    network_mode: host
+    ports:
+      - 4000:4000
+
+networks:
+  default:
+    external: true
+    name: esport_app_main
