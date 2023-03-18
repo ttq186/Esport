@@ -37,4 +37,3 @@ class AccessTokenResponse(ORJSONModel):
 class UserResponse(ORJSONModel):
     email: EmailStr
     is_admin: bool
-

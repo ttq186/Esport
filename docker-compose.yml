@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   app:
@@ -28,16 +28,6 @@ services:
       - esport_app_pg_data:/var/lib/postgresql/data
     ports:
       - 5432:5432
-
-  redis:
-    image: redis:6.2-alpine
-    hostname: esport_redis
-    container_name: esport_redis
-    command:
-      - 'redis-server'
-      - '--requirepass myStrongPassword'
-    ports:
-      - 6379:6379
 
 volumes:
   esport_app_pg_data:

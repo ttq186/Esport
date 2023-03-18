@@ -1,13 +1,12 @@
 from typing import Any
 
-from pydantic import BaseSettings, PostgresDsn, RedisDsn
+from pydantic import BaseSettings, PostgresDsn
 
 from src.constants import Environment
 
 
 class Config(BaseSettings):
     DATABASE_URL: PostgresDsn
-    REDIS_URL: RedisDsn
 
     ENVIRONMENT: Environment = Environment.PRODUCTION
 
