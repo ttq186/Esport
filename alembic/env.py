@@ -5,6 +5,7 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from src.database import metadata, DATABASE_URL
+from src.auth.models import user_tb
 
 
 # this is the Alembic Config object, which provides
@@ -26,7 +27,7 @@ target_metadata = metadata
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
-config.set_main_option("sqlalchemy.url", DATABASE_URL)
+config.set_main_option("sqlalchemy.url", DATABASE_URL.replace("asyncpg", "psycopg2"))
 config.compare_type = True
 config.compare_server_default = True
 

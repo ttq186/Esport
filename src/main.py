@@ -38,4 +38,5 @@ async def shutdown() -> None:
 async def healthcheck() -> dict[str, str]:
     return {"status": "ok"}
 
+
 app.include_router(auth_router, prefix="/auth", tags=["Auth"])

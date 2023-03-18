@@ -32,8 +32,9 @@ class JWTData(ORJSONModel):
 
 class AccessTokenResponse(ORJSONModel):
     access_token: str
-    refresh_token: str
 
 
 class UserResponse(ORJSONModel):
     email: EmailStr
+    is_admin: bool
+

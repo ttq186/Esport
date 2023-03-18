@@ -8,14 +8,15 @@ from sqlalchemy import insert, select
 from src import utils
 from src.auth.config import auth_config
 from src.auth.exceptions import InvalidCredentials
+from src.auth.models import user_tb
 from src.auth.schemas import AuthUser
 from src.auth.security import check_password, hash_password
-from src.database import auth_user, database, refresh_tokens
+from src.database import database
 
 
 async def create_user(user: AuthUser) -> Record | None:
     insert_query = (
-        insert(auth_user)
+        insert(user_tb)
         .values(
             {
                 "email": user.email,
@@ -23,20 +24,20 @@ async def create_user(user: AuthUser) -> Record | None:
                 "created_at": datetime.utcnow(),
             }
         )
-        .returning(auth_user)
+        .returning(user_tb)
     )
 
     return await database.fetch_one(insert_query)
 
 
 async def get_user_by_id(user_id: int) -> Record | None:
-    select_query = select(auth_user).where(auth_user.c.id == user_id)
+    select_query = select(user_tb).where(user_tb.c.id == user_id)
 
     return await database.fetch_one(select_query)
 
 
 async def get_user_by_email(email: str) -> Record | None:
-    select_query = select(auth_user).where(auth_user.c.email == email)
+    select_query = select(user_tb).where(user_tb.c.email == email)
 
     return await database.fetch_one(select_query)
 
