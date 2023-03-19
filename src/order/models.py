@@ -15,9 +15,7 @@ order_tb = Table(
     "order",
     metadata,
     Column("id", Integer, Identity(), primary_key=True),
-    Column(
-        "customer_id", ForeignKey("customer.id", ondelete="CASCADE"), nullable=False
-    ),
+    Column("user_id", ForeignKey("user.id", ondelete="CASCADE"), nullable=False),
     Column("shipping_address", String, nullable=False),
     Column("city", String),
     Column(

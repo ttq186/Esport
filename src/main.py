@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from src.auth.router import router as auth_router
+from src.cart.router import router as cart_router
 from src.config import app_configs, settings
 from src.database import database
 from src.product.router import router as product_router
@@ -35,3 +36,4 @@ async def healthcheck() -> dict[str, str]:
 
 app.include_router(auth_router)
 app.include_router(product_router)
+app.include_router(cart_router)

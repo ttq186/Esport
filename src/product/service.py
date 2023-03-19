@@ -7,16 +7,22 @@ from src.product.schemas import ProductIn, ProductUpdate
 
 async def create_product(product_data: ProductIn) -> Record | None:
     insert_query = (
-        product_tb.insert().values(**product_data.dict()).returning(product_tb)
+        product_tb.insert()
+        .values(**product_data.dict(exclude={"id"}))
+        .returning(product_tb)
     )
     return await database.fetch_one(insert_query)
 
 
-async def get_products(get_out_of_stocks: bool = False) -> list[Record]:
+async def get_products(
+    get_out_of_stocks: bool = False, ids: list[int] | None = None
+) -> list[Record]:
     if get_out_of_stocks:
         select_query = product_tb.select().where(product_tb.c.quantity >= 0)
     else:
         select_query = product_tb.select().where(product_tb.c.quantity > 0)
+    if ids:
+        select_query = select_query.where(product_tb.c.id.in_(ids))
     return await database.fetch_all(select_query)
 
 
