@@ -5,7 +5,11 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from src.database import metadata, DATABASE_URL
-from src.auth.models import user_tb
+from src.user.models import user_tb, admin_tb, customer_tb
+from src.product.models import product_tb
+from src.order.models import order_tb, order_item_tb
+from src.cart.models import cart_tb, cart_product_tb
+
 
 
 # this is the Alembic Config object, which provides
