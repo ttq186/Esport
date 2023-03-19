@@ -3,7 +3,6 @@ from fastapi import APIRouter, Depends, status
 from src.auth.jwt import parse_jwt_user_data
 from src.auth.schemas import JWTData
 from src.cart import service
-
 from src.cart.schemas import CartOut, CartUpdate
 
 router = APIRouter(prefix="/carts", tags=["Carts"])

@@ -1,4 +1,5 @@
 from databases.interfaces import Record
+from sqlalchemy import desc
 
 from src.database import database
 from src.product.models import product_tb
@@ -23,6 +24,7 @@ async def get_products(
         select_query = product_tb.select().where(product_tb.c.quantity > 0)
     if ids:
         select_query = select_query.where(product_tb.c.id.in_(ids))
+    select_query = select_query.order_by(desc(product_tb.c.created_at))
     return await database.fetch_all(select_query)
 
 

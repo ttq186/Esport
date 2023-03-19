@@ -16,8 +16,9 @@ async def get_cart_items(cart_id: int) -> list[Record]:
     select_query = (
         select(
             cart_item_tb.c.cart_id,
-            cart_item_tb.c.quantity,
+            cart_item_tb.c.quantity.label("cart_quantity"),
             product_tb.c.id.label("id"),
+            product_tb.c.quantity,
             product_tb.c.name,
             product_tb.c.tag,
             product_tb.c.description,
